@@ -27,7 +27,7 @@ public class RedirectServlet extends HttpServlet {
 		
 		//dispatch 방식으로 위임
 		//context path를 적어주지 않는다
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/redirectForm.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/kr.or.ddit.user.repository/redirectForm.jsp");
 		rd.forward(request, response);
 		
 	}
@@ -39,7 +39,7 @@ public class RedirectServlet extends HttpServlet {
 		//메소드 인자로 웹브라우저 주소줄에 입력할 url을 작성
 		//context path root가 아니면 context path도 같이 적어줘야 한다
 		
-		response.sendRedirect( "/jsp/jsp/login.jsp");
+		response.sendRedirect( "/kr.or.ddit.user.repository/kr.or.ddit.user.repository/login.jsp");
 	}
 
 }
