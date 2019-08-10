@@ -26,7 +26,7 @@
     <script>
     	$(document).ready(function () {
 			
-    		var userId = getCookie("userId");
+    		var userId = Cookies.get("userId");
     		if(userId != undefined){
     			$('#userId').val(userId);
     			
@@ -40,9 +40,9 @@
 				
 				// remember me checkBox가 체크가 되었는지??
 				if($('#rememberMe'.prop("checked")){
-					setCookie("userId", $('#userId').val(), 30);
+					Cookies.set("userId", $("#userId").val(), {expires : 30});
 				} else {
-					deleteCookie("userId");
+					Cookies.remove("userId");
 				}
 				
 				// 로그인 요청
@@ -57,32 +57,7 @@
 				// ==> userId. 쿠키를 삭제
 			});
 		});
-    		
-    	function getCookie(cookieId) {
-			
-    		var cookies = document.cookie.split("; ");\
-    		
-    		for(var i = 0; i < cookies.length; i++){
-    			
-    			var cookie = cookies[i];
-    			var cookieNmVal = cookie.split("=");
-    			
-    			if(cookieId == cookieNmVal[0])
-    				return cookieNmVal[1];
-    		}
-		}
-    	
-    	function setCookie(cookieNm, cookieValue, expires) {
-			// 쿠키 유호기간 설정
-			var dt = new Date();
-			dt.setDate(dt.getDate() + Number(expires));
-			
-			document.cookie = cookieNm + "=" + cookieValue + "; path=/; expires=" + dt.toCMTString();
-		}
-    	
-    	function deleteCookie(cookieNm) {
-			setCookie(cookieNm, "", -1);
-		}
+
     </script>
 
   </head>
