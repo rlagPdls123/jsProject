@@ -22,6 +22,13 @@ public class LoginController extends HttpServlet {
    private static final long serialVersionUID = 1L;
    
    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+   
+   private IUserDao userDao;
+   
+   @Override
+	public void init() throws ServletException {
+	   userDao = new UserDao();
+   }
        
    /**
     * 
@@ -39,10 +46,11 @@ public class LoginController extends HttpServlet {
       
 	   // 웹브라우저가 보낸 cookie확인
 	   Cookie[] cookies = request.getCookies();
+	   if(cookies != null) {
 	   for(Cookie cookie : cookies) {
 		   logger.debug("cookie name : {}, cookie value:{}", cookie.getName(), cookie.getValue());
+	   	}
 	   }
-	   
 	   // 응답을 생성 할 때 웹브라우저에게 쿠키를 저장할 것을 지시
 	   Cookie cookie = new Cookie("serverGen", "serverValue");
 	   cookie.setMaxAge(60*60*24*7); // 7일의 유호기간을 갖는 쿠키
@@ -69,6 +77,12 @@ public class LoginController extends HttpServlet {
       // userId, password 파라미터 logger 출력
       String userId = request.getParameter("userId");
       String pass = request.getParameter("pass");
+      //String password = request.getParameter("password");
+      
+      String rememberMe = request.getParameter("rememberMe");
+      //remeberMe 파라미터가 존재할 경우 userId를 cookie로 생성
+      manageUserldCookie(response, userId, rememberMe);
+      
       
       logger.debug("userId : {}", userId);
       logger.debug("password : {}", pass);
@@ -105,5 +119,17 @@ public class LoginController extends HttpServlet {
          doGet(request, response);
       }
    }
+
+private void manageUserldCookie(HttpServletResponse response, String userId, String rememberMe) {
+	Cookie cookie = new Cookie("userId", userId);
+      
+      if(rememberMe != null) {
+    	  cookie.setMaxAge(60*60*24*30);	//30일
+      }
+      else {
+    	  cookie.setMaxAge(0);	//삭제	
+      }
+      response.addCookie(cookie);
+}
 
 }
