@@ -39,7 +39,7 @@ public class UserDaoTest {
 		User userVo = userDao.getUser(userId);
 		
 		/***Then***/
-		assertEquals("브라운", userVo.getUserName());
+		assertEquals("브라운", userVo.getUserNm());
 		assertEquals("brown1234", userVo.getPass());
 	}
 

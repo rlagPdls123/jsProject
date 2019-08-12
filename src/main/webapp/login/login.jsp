@@ -71,9 +71,9 @@
     <div class="container">
     	<%
     		HttpSession httpSession = request.getSession();
-    	    		User userVo = (User)httpSession.getAttribute("S_USERVO");
-    	    		String userName = "";
-    	    		userName = userVo == null ? "" : userVo.getUserName();
+    	    	    		User userVo = (User)httpSession.getAttribute("S_USERVO");
+    	    	    		String userName = "";
+    	    	    		userName = userVo == null ? "" : userVo.getUserNm();
     	%>
 		사용자 이름 : <%=userName %>
 

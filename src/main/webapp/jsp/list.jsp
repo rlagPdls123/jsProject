@@ -32,7 +32,7 @@
       </tr>
       <%for(int i = 0; i < userList.size(); i++){ %>
          <tr>
-            <td><%=userList.get(i).getUserName() %></td>
+            <td><%=userList.get(i).getUserNm()%></td>
          </tr>
       <%} %>
    </table>
